@@ -1,0 +1,49 @@
+Mining pool methods
+Mining pools may contain hundreds or thousands of miners using specialized protocols. In all these schemes {\displaystyle B} stands for a block reward minus pool fee and {\displaystyle p} is a probability of finding a block in a share attempt ({\displaystyle p=1/D}, where {\displaystyle D} is current block difficulty). A pool can support "variable share difficulty" feature, which means that a miner can select the share target (the lower bound of share difficulty) on their own and change {\displaystyle p} accordingly.
+
+Pay-per-Share
+The Pay-per-Share (PPS) approach offers an instant, guaranteed payout to a miner for their contribution to the probability that the pool finds a block. Miners are paid out from the pool's existing balance and can withdraw their payout immediately. This model allows for the least possible variance in payment for miners while also transferring much of the risk to the pool's operator.
+
+Each share costs exactly the expected value of each hash attempt {\displaystyle R=B\cdot p}.
+
+Proportional
+Miners earn shares until the pool finds a block (the end of the mining round). After that each user gets reward {\displaystyle R=B\cdot {\frac {n}{N}}}, where {\displaystyle n} is amount of their own shares, and {\displaystyle N} is amount of all shares in this round. In other words, all shares are equal, but its value is calculated only at the end of each round.
+
+Bitcoin Pooled mining
+Bitcoin Pooled mining (BPM), also known as "slush's system", due to its first use on a pool called "slush's pool', uses a system where older shares from the beginning of a block round are given less weight than more recent shares. A new round starts the moment the pool solves a block and miners are rewarded Proportional to the shares submitted. This reduces the ability to cheat the mining pool system by switching pools during a round, to maximize profit.
+
+Pay-per-last-N-shares
+Pay-per-last-N-shares (PPLNS) method is similar to Proportional, but the miner's reward is calculated on a basis of N last shares, instead of all shares for the last round. It means that when a block is found, the reward of each miner is calculated based on the miner contribution to the last N pool shares. Therefore, if the round was short enough all miners get more profit and vice versa.
+
+Solo Mining Pool
+Solo pools operate the same way as usual pools, with the only difference being that block reward is not distributed among all miners. The entire reward in a solo pool goes to the miner who finds the block.
+
+Peer-to-Peer Mining Pool
+Peer-to-peer mining pool (P2Pool) decentralizes the responsibilities of a pool server, removing the chance of the pool operator cheating or the server being a single point of failure. Miners work on a side blockchain called a share chain, mining at a lower difficulty at a rate of one share block per 30 seconds. Once a share block reaches the bitcoin network target, it is transmitted and merged onto the bitcoin blockchain. Miners are rewarded when this occurs proportional to the shares submitted prior to the target block. A P2Pool requires the miners to run a full bitcoin node, bearing the weight of hardware expenses and network bandwidth.
+
+Geometric method
+Geometric Method (GM) was invented by Meni Rosenfeld. It is based on the same "score" idea, as Slush's method: the score granted for every new share, relatively to already existing score and the score of future shares, is always the same, thus there is no advantage to mining early or late in the round.
+
+The method goes as follows:
+
+Choose parameters {\displaystyle f} and {\displaystyle c} (fixed and variable fee).
+At the start of every round, set {\displaystyle s=1}. For every worker {\displaystyle k}, let {\displaystyle S_{k}} be the worker's score for this round, and set {\displaystyle S_{k}=0}.
+Set {\displaystyle r=1-p+{\frac {p}{c}}}, where {\displaystyle p=1/D}. If the difficulty changes during the round, {\displaystyle r} needs to be updated.
+When worker {\displaystyle k} submits a share, set {\displaystyle S_{k}=S_{k}+spB}, and then {\displaystyle s=sr}.
+If the share is a valid block, end the round. For every worker {\displaystyle k} pay {\displaystyle {\frac {(1-f)(r-1)S_{k}}{sp}}}
+Double Geometric method
+Generalized version of Geometric and PPLNS methods. It involves new parameter: {\displaystyle o} ("cross-round leakage"). When {\displaystyle o=0} this becomes the Geometric method. When {\displaystyle o=1} this becomes a variant of PPLNS, with exponential decay instead of a step function.
+
+Choose parameters {\displaystyle f}, {\displaystyle c}, and {\displaystyle o}.
+When the pool first starts running, initialize {\displaystyle s=1}. For every worker {\displaystyle k}, let {\displaystyle S_{k}} be the worker's score, and set {\displaystyle S_{k}=0}.
+Set {\displaystyle r=1+{\frac {1}{c}}p(1-c)(1-o)}. If at any point the difficulty or the parameters change, {\displaystyle r} should be recalculated.
+When worker {\displaystyle k} submits a share
+set {\displaystyle S_{k}=S_{k}+(1-f)(1-c)spB}{\displaystyle S_{k}=S_{k}+(1-f)(1-c)spB} (where {\displaystyle B}B is the block reward at the time it was submitted), and then {\displaystyle s=sr}s=sr.
+If the share is a valid block, then also do the following for each worker {\displaystyle k}k: Give him a payout of {\displaystyle {\frac {1}{c_{s}}}(1-o)S_{k}}{\displaystyle {\frac {1}{c_{s}}}(1-o)S_{k}}, and then set {\displaystyle S_{k}=S_{k}\cdot o}S_{k}=S_{k}\cdot o.
+Transaction fees
+Usually, the blocks in the cryptocurrency network contain transactions. Transaction fees are paid to the miner (mining pool). Different mining pools could share these fees between their miners or not. Pay-per-last-N-shares (PPLNS), Pay-Per-Share Plus (PPS+) or Full Pay-Per-Share (FPPS) are the most fair methods where the payouts from the pool include not only the block subsidy but also the transaction fees.[citation needed]
+
+Multipool mining
+Multipools switch between different altcoins and constantly calculate which coin is at that moment the most profitable to mine. Two key factors are involved in the algorithm that calculates profitability, the block time, and the price on the exchanges. To avoid the need for many different wallets for all possible minable coins, multipools may automatically exchange the mined coin to a coin that is accepted in the mainstream (for example bitcoin). Using this method, because the most profitable coins are being mined and then sold for the intended coin, it is possible to receive more coins in the intended currency than by mining that currency alone. This method also increases demand on the intended coin, which has the side effect of increasing or stabilizing the value of the intended coin.
+
+Some companies that sell hash power may do so by aggregating the work of many small miners (for example, NiceHash), paying them proportionally by share like a pool would. Some such companies operate their own pools. These can be considered multipools, because they usually employ a similar method of work switching, although the work they assign is determined by customer demand rather than "raw" profitability.
