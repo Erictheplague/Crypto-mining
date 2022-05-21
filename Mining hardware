@@ -1,0 +1,19 @@
+Users have used various types of hardware over time to mine blocks. Hardware specifications and performance statistics are detailed on the Mining Hardware Comparison page.
+
+CPU Mining
+Early Bitcoin client versions allowed users to use their CPUs to mine. The advent of GPU mining made CPU mining financially unwise as the hashrate of the network grew to such a degree that the amount of bitcoins produced by CPU mining became lower than the cost of power to operate a CPU. The option was therefore removed from the core Bitcoin client's user interface.
+
+GPU Mining
+GPU Mining is drastically faster and more efficient than CPU mining. See the main article: Why a GPU mines faster than a CPU. A variety of popular mining rigs have been documented.
+
+FPGA Mining
+FPGA mining is a very efficient and fast way to mine, comparable to GPU mining and drastically outperforming CPU mining. FPGAs typically consume very small amounts of power with relatively high hash ratings, making them more viable and efficient than GPU mining. See Mining Hardware Comparison for FPGA hardware specifications and statistics.
+
+ASIC Mining
+An application-specific integrated circuit, or ASIC, is a microchip designed and manufactured for a very specific purpose. ASICs designed for Bitcoin mining were first released in 2013. For the amount of power they consume, they are vastly faster than all previous technologies and already have made GPU mining financially.
+
+Mining services (Cloud mining)
+Mining contractors provide mining services with performance specified by contract, often referred to as a "Mining Contract." They may, for example, rent out a specific level of mining capacity for a set price at a specific duration.
+
+Pools
+As more and more miners competed for the limited supply of blocks, individuals found that they were working for months without finding a block and receiving any reward for their mining efforts. This made mining something of a gamble. To address the variance in their income miners started organizing themselves into pools so that they could share rewards more evenly. See Pooled mining and Comparison of mining pools.
